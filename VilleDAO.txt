@@ -1,0 +1,36 @@
+package org.antislashn.jpa;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
+
+
+public class VilleDAO {
+	@PersistenceUnit(unitName="france")
+	private EntityManagerFactory emf;
+	@Resource
+
+	public VilleDAO(EntityManagerFactory emf) {
+		this.emf = emf;
+	}
+	
+	public Ville getVilleById(long id){
+		EntityManager em = emf.createEntityManager();
+		Ville v = em.find(Ville.class, id);
+		em.close();
+		return v;
+	}
+	
+	public List<Ville> getVillesByDepartement(String departement){
+		EntityManager em = emf.createEntityManager();
+		Query query = em.createNamedQuery("getVillesBydepartement");
+		query.setParameter("departement", departement);
+		List<Ville> villes = query.getResultList();
+		em.close();
+		return villes;
+	}
+}
