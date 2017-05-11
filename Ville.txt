@@ -1,0 +1,83 @@
+package org.antislashn.jpa;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="villes")
+@NamedQueries({
+	@NamedQuery(name="getVillesBydepartement",
+				query="SELECT v FROM Ville v WHERE v.departement = :departement")
+})
+public class Ville {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="kp_ville")
+	private long id;
+	private String region;
+	private String departement;
+	@Column(name="ville")
+	private String nom;
+	@Column(name="code_postal")
+	private String codePostal;
+	@Column(name="lat")
+	private double latitude;
+	@Column(name="lng")
+	private double longitude;
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getRegion() {
+		return region;
+	}
+	public void setRegion(String region) {
+		this.region = region;
+	}
+	public String getDepartement() {
+		return departement;
+	}
+	public void setDepartement(String departement) {
+		this.departement = departement;
+	}
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	public String getCodePostal() {
+		return codePostal;
+	}
+	public void setCodePostal(String codePostal) {
+		this.codePostal = codePostal;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	@Override
+	public String toString() {
+		return "Ville [id=" + id + ", region=" + region + ", departement=" + departement + ", nom=" + nom
+				+ ", codePostal=" + codePostal + ", latitude=" + latitude + ", longitude=" + longitude + "]";
+	}
+	
+
+}
+
